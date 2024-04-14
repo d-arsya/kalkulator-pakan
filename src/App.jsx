@@ -1,9 +1,16 @@
 import { useState } from 'react'
-import './App.css'
+import data from "./data/data"
+import Ternak from './components/Ternak'
+import Bahan from "./components/Bahan"
+
 
 function App() {
+  const [ternak, setTernak] = useState(data.initialState);
   return (
-    <h1>Kalkulator Pakan</h1>
+    <div className="container">
+      <Ternak ternak={ternak} setTernak={setTernak} dataTernak={data.dataTernak}></Ternak>
+      <Bahan dataBahan={data.dataBahan}></Bahan>
+    </div>
   )
 }
 
