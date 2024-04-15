@@ -11,7 +11,7 @@ export default function Ternak({ dataTernak,ternak,setTernak }) {
     let namaBahan = [];
     let nilaiBahan = [];
     for (let key in ternak) {
-      if (key != "id" && key != "Nama") {
+      if (key != "id" && key != "nama") {
         namaBahan.push(key);
         nilaiBahan.push(ternak[key]);
       }
@@ -45,7 +45,7 @@ export default function Ternak({ dataTernak,ternak,setTernak }) {
         {dataTernak.map((e) => {
           return (
             <option key={e.id} value={e.id}>
-              {e.Nama}
+              {e.nama}
             </option>
           );
         })}

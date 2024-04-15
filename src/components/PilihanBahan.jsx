@@ -1,5 +1,4 @@
 import { useState } from "react";
-import KomposisiBahan from "./KomposisiBahan";
 export default function PilihanBahan({ dataBahan,onBahan,jumlahBahan,setJumlahBahan,bahanUse,setBahanUse }) {
   
   return (
@@ -34,8 +33,8 @@ export default function PilihanBahan({ dataBahan,onBahan,jumlahBahan,setJumlahBa
                   <option value="pilih">Pilih Bahan</option>
                   {dataBahan.map((e) => {
                     return (
-                      <option key={e.id} value={e.Nama}>
-                        {e.Nama}
+                      <option key={e.id} value={e.id}>
+                        {e.nama}
                       </option>
                     );
                   })}
