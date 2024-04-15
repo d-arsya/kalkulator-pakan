@@ -1,17 +1,21 @@
 import { useState } from "react";
-export default function PilihanBahan({ dataBahan }) {
-  const [jumlahBahan, setJumlahBahan] = useState(3);
+import KomposisiBahan from "./KomposisiBahan";
+export default function PilihanBahan({ dataBahan,onBahan,jumlahBahan,setJumlahBahan,bahanUse,setBahanUse }) {
+  
   return (
     <div>
       <h5 className="my-3 text-center">Pemilihan Bahan</h5>
       <div className="input-group">
         <input
           type="number"
-          value={jumlahBahan}
-          onChange={(e) => setJumlahBahan(e.target.value)}
+          value={jumlahBahan>=0?jumlahBahan:1}
+          onChange={(e) => {
+            setJumlahBahan(e.target.value)
+            setBahanUse(bahanUse.slice(0,jumlahBahan-1))
+          }}
           className="form-control"
         />
-        <span class="input-group-text">Bahan</span>
+        <span className="input-group-text">Bahan</span>
       </div>
       <table className="table">
         <thead className="text-center">
@@ -22,15 +26,15 @@ export default function PilihanBahan({ dataBahan }) {
           </tr>
         </thead>
         <tbody>
-          {[...Array(parseInt(jumlahBahan ? jumlahBahan : 1))].map((x, i) => (
+          {[...Array(parseInt(jumlahBahan>0 ? jumlahBahan : 1))].map((x, i) => (
 
-            <tr>
+            <tr key={i}>
               <td>
-                <select className="form-select">
-                  <option>Pilih Bahan</option>
+                <select key={i} onChange={(e)=>{onBahan(e,i)}}name="nama" className="form-select">
+                  <option value="pilih">Pilih Bahan</option>
                   {dataBahan.map((e) => {
                     return (
-                      <option key={e.id} value={e.id}>
+                      <option key={e.id} value={e.Nama}>
                         {e.Nama}
                       </option>
                     );
@@ -39,12 +43,12 @@ export default function PilihanBahan({ dataBahan }) {
               </td>
               <td>
                 <div className="input-group">
-                  <input type="number" name="" id="" className="form-control" />
+                  <input type="number" onChange={(e)=>{onBahan(e,i)}} name="prosentase" id="" className="form-control" />
                 </div>
               </td>
               <td>
                 <div className="input-group">
-                  <input type="number" name="" id="" className="form-control" />
+                  <input type="number" onChange={(e)=>{onBahan(e,i)}} name="harga" id="" className="form-control" />
                 </div>
               </td>
             </tr>
@@ -54,3 +58,4 @@ export default function PilihanBahan({ dataBahan }) {
     </div>
   );
 }
+
