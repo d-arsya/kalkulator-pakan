@@ -21,14 +21,17 @@ export default function KomposisiBahan({ bahanUse }) {
       hitungBerat(e.prosentase) * e.harga
         ? hitungBerat(e.prosentase) * e.harga
         : 0;
-    totalBahan.BK += parseFloat(e.BK)
-    totalBahan.PK += parseFloat(e.PK)
-    totalBahan.LK += parseFloat(e.LK)
-    totalBahan.Abu += parseFloat(e.Abu)
-    totalBahan.Ca += parseFloat(e.Ca)
-    totalBahan.P += parseFloat(e.P)
-    totalBahan.NDF += parseFloat(e.NDF)
-    totalBahan.TDN += parseFloat(e.TDN)
+    // totalBahan.BK += parseFloat(e.BK)
+    // totalBahan.PK += parseFloat(e.PK)
+    // totalBahan.LK += parseFloat(e.LK)
+    // totalBahan.Abu += parseFloat(e.Abu)
+    // totalBahan.Ca += parseFloat(e.Ca)
+    // totalBahan.P += parseFloat(e.P)
+    // totalBahan.NDF += parseFloat(e.NDF)
+    // totalBahan.TDN += parseFloat(e.TDN)
+    for(let key in totalBahan){
+      totalBahan[key]+=parseFloat(e[key])*parseFloat(e.prosentase)/100
+    }
     return {
       ...e,
       berat: hitungBerat(e.prosentase) ? hitungBerat(e.prosentase) : 0,
@@ -95,14 +98,14 @@ export default function KomposisiBahan({ bahanUse }) {
           </tr>
         </thead>
         <tbody>
-          <td>{totalBahan.BK}</td>
-          <td>{totalBahan.LK}</td>
-          <td>{totalBahan.PK}</td>
-          <td>{totalBahan.Abu}</td>
-          <td>{totalBahan.Ca}</td>
-          <td>{totalBahan.P}</td>
-          <td>{totalBahan.NDF}</td>
-          <td>{totalBahan.TDN}</td>
+          <td>{totalBahan.BK.toFixed(1)}</td>
+          <td>{totalBahan.LK.toFixed(1)}</td>
+          <td>{totalBahan.PK.toFixed(1)}</td>
+          <td>{totalBahan.Abu.toFixed(1)}</td>
+          <td>{totalBahan.Ca.toFixed(1)}</td>
+          <td>{totalBahan.P.toFixed(1)}</td>
+          <td>{totalBahan.NDF.toFixed(1)}</td>
+          <td>{totalBahan.TDN.toFixed(1)}</td>
         </tbody>
       </table>
     </div>
