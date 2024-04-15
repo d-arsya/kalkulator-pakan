@@ -84,9 +84,9 @@ export default function KomposisiBahan({ bahanUse }) {
       </h2>
 
       <h5 className="my-3 text-center">Total Bahan</h5>
-      <table>
+      <table className="table text-center">
         <thead>
-          <tr className="text-center">
+          <tr>
             <th style={{width:"10vw"}}>BK</th>
             <th style={{width:"10vw"}}>LK</th>
             <th style={{width:"10vw"}}>PK</th>
