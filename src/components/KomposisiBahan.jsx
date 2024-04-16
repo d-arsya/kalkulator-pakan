@@ -73,22 +73,22 @@ export default function KomposisiBahan({ bahanUse }) {
           })}
         </tbody>
       </table>
-      <h2 className="text-end">
-        Rp{" "}
-        {totalHarga.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".")}
-      </h2>
       <h5 className="text-end">
         Rp{" "}
-        {(totalHarga/berat).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".")}/Kg
+        {totalHarga.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".")}
       </h5>
+      <p className="text-end">
+        Rp{" "}
+        {(totalHarga/berat).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".")}/Kg
+      </p>
 
-      <h5 className="my-3 text-center">Total Bahan</h5>
+      <h5 className="my-3 text-center">Nutrisi Bahan</h5>
       <table className="table text-center">
         <thead>
           <tr>
             <th style={{width:"10vw"}}>BK</th>
-            <th style={{width:"10vw"}}>LK</th>
             <th style={{width:"10vw"}}>PK</th>
+            <th style={{width:"10vw"}}>LK</th>
             <th style={{width:"10vw"}}>Abu</th>
             <th style={{width:"10vw"}}>Ca</th>
             <th style={{width:"10vw"}}>P</th>
@@ -97,9 +97,10 @@ export default function KomposisiBahan({ bahanUse }) {
           </tr>
         </thead>
         <tbody>
+          
           <td>{totalBahan.BK.toFixed(2)}</td>
-          <td>{totalBahan.LK.toFixed(2)}</td>
           <td>{totalBahan.PK.toFixed(2)}</td>
+          <td>{totalBahan.LK.toFixed(2)}</td>
           <td>{totalBahan.Abu.toFixed(2)}</td>
           <td>{totalBahan.Ca.toFixed(2)}</td>
           <td>{totalBahan.P.toFixed(2)}</td>
