@@ -1,3 +1,27 @@
 body{
   padding-top: 40px;
 }
+.progress {
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:conic-gradient(#0000 10%,#766DF4);
+  -webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  animation:s3 1s infinite linear;
+}
+.main-cont{
+  /* Copy code to element you want to animate */
+animation: customAni .5s ease 0s normal none;
+}
+/* Copy this code after the above code */
+@keyframes customAni {
+  0% {
+	transform: translateY(40px);
+  }
+
+  100% {
+	transform: translateY(0px);
+  }
+}
+
+@keyframes s3 {to{transform: rotate(1turn)}}

@@ -50,7 +50,7 @@ export default function Ternak({ dataTernak,ternak,setTernak }) {
           );
         })}
       </select>
-      <h5 className="my-3 text-center">Kebutuhan Nutrisi</h5>
+      <p className="my-3 text-start">Kebutuhan :</p>
       <TernakSelected></TernakSelected>
     </div>
   );

@@ -4,7 +4,6 @@ import KomposisiBahan from "./KomposisiBahan"
 export default function Bahan({ dataBahan }) {
   const [jumlahBahan, setJumlahBahan] = useState(3);
   const [bahanUse,setBahanUse] = useState([])
-  console.table(bahanUse)
   function getBahan(id){
     return dataBahan.filter(e=>{return e.id==id})[0]
   }

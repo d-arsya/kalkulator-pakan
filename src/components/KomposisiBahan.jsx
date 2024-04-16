@@ -3,6 +3,7 @@ export default function KomposisiBahan({ bahanUse }) {
   let totalHarga = 0;
   const [berat, setBerat] = useState(1);
   function hitungBerat(ber) {
+    ber = ber?ber:0
     return parseFloat((parseInt(ber) / 100) * berat).toFixed(1);
   }
   let totalBahan = {
@@ -15,30 +16,25 @@ export default function KomposisiBahan({ bahanUse }) {
     NDF: 0,
     TDN: 0,
   };
-  console.table(totalBahan)
   let semua = [...bahanUse].map((e) => {
     totalHarga +=
       hitungBerat(e.prosentase) * e.harga
         ? hitungBerat(e.prosentase) * e.harga
         : 0;
     for(let key in totalBahan){
-      console.log(totalBahan[key],e[key],e.prosentase)
       totalBahan[key]+=parseFloat(e[key])*parseFloat(e.prosentase)/100
     }
-    console.table(totalBahan)
-    // console.table(totalBahan)
+    e.harga = e.harga?e.harga:0
     return {
       ...e,
-      berat: hitungBerat(e.prosentase) ? hitungBerat(e.prosentase) : 0,
+      berat: hitungBerat(e.prosentase),
       hargaTotal:
-        hitungBerat(e.prosentase) * e.harga
-          ? hitungBerat(e.prosentase) * e.harga
-          : 0,
+        hitungBerat(e.prosentase) * e.harga,
     };
   });
   return (
     <div>
-      <h5 className="my-3 text-center">Komposisi Bahan</h5>
+      <p className="my-3 text-center">Komposisi Bahan</p>
       <div className="input-group">
         <input
           type="number"
@@ -51,9 +47,9 @@ export default function KomposisiBahan({ bahanUse }) {
       <table className="table">
         <thead className="text-center">
           <tr>
-            <th style={{ width: "50vw" }}>Bahan</th>
-            <th style={{ width: "20vw" }}>Berat</th>
-            <th style={{ width: "30vw" }}>Harga</th>
+            <td style={{ width: "50vw" }}>Bahan</td>
+            <td style={{ width: "20vw" }}>Berat</td>
+            <td style={{ width: "30vw" }}>Harga</td>
           </tr>
         </thead>
         <tbody>
@@ -86,18 +82,18 @@ export default function KomposisiBahan({ bahanUse }) {
       <table className="table text-center">
         <thead>
           <tr>
-            <th style={{width:"10vw"}}>BK</th>
-            <th style={{width:"10vw"}}>PK</th>
-            <th style={{width:"10vw"}}>LK</th>
-            <th style={{width:"10vw"}}>Abu</th>
-            <th style={{width:"10vw"}}>Ca</th>
-            <th style={{width:"10vw"}}>P</th>
-            <th style={{width:"10vw"}}>NDF</th>
-            <th style={{width:"10vw"}}>TDN</th>
+            <td style={{widtd:"10vw"}}>BK</td>
+            <td style={{widtd:"10vw"}}>PK</td>
+            <td style={{widtd:"10vw"}}>LK</td>
+            <td style={{widtd:"10vw"}}>Abu</td>
+            <td style={{widtd:"10vw"}}>Ca</td>
+            <td style={{widtd:"10vw"}}>P</td>
+            <td style={{widtd:"10vw"}}>NDF</td>
+            <td style={{widtd:"10vw"}}>TDN</td>
           </tr>
         </thead>
         <tbody>
-          
+          <tr>
           <td>{totalBahan.BK.toFixed(2)}</td>
           <td>{totalBahan.PK.toFixed(2)}</td>
           <td>{totalBahan.LK.toFixed(2)}</td>
@@ -106,6 +102,8 @@ export default function KomposisiBahan({ bahanUse }) {
           <td>{totalBahan.P.toFixed(2)}</td>
           <td>{totalBahan.NDF.toFixed(2)}</td>
           <td>{totalBahan.TDN.toFixed(2)}</td>
+
+          </tr>
         </tbody>
       </table>
     </div>
