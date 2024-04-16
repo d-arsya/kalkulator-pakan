@@ -3,7 +3,7 @@ export default function PilihanBahan({ dataBahan,onBahan,jumlahBahan,setJumlahBa
   
   return (
     <div>
-      <p className="my-3 text-start">Pemilihan Bahan</p>
+      <h5 className="my-3 text-center">Pemilihan Bahan</h5>
       <div className="input-group">
         <input
           type="number"
