@@ -21,17 +21,12 @@ export default function KomposisiBahan({ bahanUse }) {
       hitungBerat(e.prosentase) * e.harga
         ? hitungBerat(e.prosentase) * e.harga
         : 0;
-    // totalBahan.BK += parseFloat(e.BK)
-    // totalBahan.PK += parseFloat(e.PK)
-    // totalBahan.LK += parseFloat(e.LK)
-    // totalBahan.Abu += parseFloat(e.Abu)
-    // totalBahan.Ca += parseFloat(e.Ca)
-    // totalBahan.P += parseFloat(e.P)
-    // totalBahan.NDF += parseFloat(e.NDF)
-    // totalBahan.TDN += parseFloat(e.TDN)
     for(let key in totalBahan){
+      console.log(totalBahan[key],e[key],e.prosentase)
       totalBahan[key]+=parseFloat(e[key])*parseFloat(e.prosentase)/100
     }
+    console.table(totalBahan)
+    // console.table(totalBahan)
     return {
       ...e,
       berat: hitungBerat(e.prosentase) ? hitungBerat(e.prosentase) : 0,
@@ -82,6 +77,10 @@ export default function KomposisiBahan({ bahanUse }) {
         Rp{" "}
         {totalHarga.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".")}
       </h2>
+      <h5 className="text-end">
+        Rp{" "}
+        {(totalHarga/berat).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".")}/Kg
+      </h5>
 
       <h5 className="my-3 text-center">Total Bahan</h5>
       <table className="table text-center">
@@ -98,14 +97,14 @@ export default function KomposisiBahan({ bahanUse }) {
           </tr>
         </thead>
         <tbody>
-          <td>{totalBahan.BK.toFixed(1)}</td>
-          <td>{totalBahan.LK.toFixed(1)}</td>
-          <td>{totalBahan.PK.toFixed(1)}</td>
-          <td>{totalBahan.Abu.toFixed(1)}</td>
-          <td>{totalBahan.Ca.toFixed(1)}</td>
-          <td>{totalBahan.P.toFixed(1)}</td>
-          <td>{totalBahan.NDF.toFixed(1)}</td>
-          <td>{totalBahan.TDN.toFixed(1)}</td>
+          <td>{totalBahan.BK.toFixed(2)}</td>
+          <td>{totalBahan.LK.toFixed(2)}</td>
+          <td>{totalBahan.PK.toFixed(2)}</td>
+          <td>{totalBahan.Abu.toFixed(2)}</td>
+          <td>{totalBahan.Ca.toFixed(2)}</td>
+          <td>{totalBahan.P.toFixed(2)}</td>
+          <td>{totalBahan.NDF.toFixed(2)}</td>
+          <td>{totalBahan.TDN.toFixed(2)}</td>
         </tbody>
       </table>
     </div>
