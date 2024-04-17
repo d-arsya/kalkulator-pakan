@@ -10,6 +10,13 @@ self.addEventListener("install", (event) => {
       "/index.html",
       "/assets/index-qE4NpTUm.js",
       "/assets/index-CXlQ_1Pk.css",
+      "images/icons/icon-72x72.png",
+      "images/icons/icon-128x128.png",
+      "images/icons/icon-144x144.png",
+      "images/icons/icon-152x152.png",
+      "images/icons/icon-192x192.png",
+      "images/icons/icon-384x384.png",
+      "images/icons/icon-512x512.png",
     ]),
   );
 });
