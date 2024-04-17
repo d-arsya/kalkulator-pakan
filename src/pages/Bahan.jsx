@@ -22,7 +22,7 @@ export default function Bahan() {
             return (
               <tr key={i}>
                 {Object.keys(e).map(f=>{
-                if(f!="TDN"&&f!="id")return <td key={f}>{e[f]}</td>}
+                if(f!="NDF"&&f!="id")return <td key={f}>{e[f]}</td>}
               )}
               </tr>
             );

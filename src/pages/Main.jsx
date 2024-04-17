@@ -26,7 +26,7 @@ function Main(){
           .then(res=>res.json())
           .then(res=>{
             setDataTernak(res.data)
-            localStorage.setItem("daraTernak",JSON.stringify(res.data))
+            localStorage.setItem("dataTernak",JSON.stringify(res.data))
         })
           fetch("https://script.google.com/macros/s/AKfycbwgcwSOROmoKE26pyN3YkBAS2_MpaM2zC_ySZc8z0lo9_0HZXx_bJMZTFULsKVAydNiCg/exec?nama=Bahan")
           .then(res=>res.json())
