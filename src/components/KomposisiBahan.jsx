@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function KomposisiBahan({ bahanUse }) {
+export default function KomposisiBahan({ bahanUse,ternak }) {
   let totalHarga = 0;
   const [berat, setBerat] = useState(1);
   function hitungBerat(ber) {
@@ -16,6 +16,16 @@ export default function KomposisiBahan({ bahanUse }) {
     NDF: 0,
     TDN: 0,
   };
+  let kesimpulanBahan = {
+    BK: 0,
+    PK: 0,
+    LK: 0,
+    Abu: 0,
+    Ca: 0,
+    P: 0,
+    NDF: 0,
+    TDN: 0,
+  };
   let semua = [...bahanUse].map((e) => {
     totalHarga +=
       hitungBerat(e.prosentase) * e.harga
@@ -23,6 +33,7 @@ export default function KomposisiBahan({ bahanUse }) {
         : 0;
     for(let key in totalBahan){
       totalBahan[key]+=parseFloat(e[key])*parseFloat(e.prosentase)/100
+      kesimpulanBahan[key] = totalBahan[key]-ternak[key]
     }
     e.harga = e.harga?e.harga:0
     return {
@@ -53,9 +64,9 @@ export default function KomposisiBahan({ bahanUse }) {
           </tr>
         </thead>
         <tbody>
-          {semua.map((e) => {
+          {semua.map((e,i) => {
             return (
-              <tr>
+              <tr key={i}>
                 <td>{e.nama}</td>
                 <td>{e.berat} Kg</td>
                 <td>
@@ -81,27 +92,23 @@ export default function KomposisiBahan({ bahanUse }) {
       <h5 className="my-3 text-center">Nutrisi Bahan</h5>
       <table className="table text-center">
         <thead>
-          <tr>
-            <td style={{widtd:"10vw"}}>BK</td>
-            <td style={{widtd:"10vw"}}>PK</td>
-            <td style={{widtd:"10vw"}}>LK</td>
-            <td style={{widtd:"10vw"}}>Abu</td>
-            <td style={{widtd:"10vw"}}>Ca</td>
-            <td style={{widtd:"10vw"}}>P</td>
-            <td style={{widtd:"10vw"}}>NDF</td>
-            <td style={{widtd:"10vw"}}>TDN</td>
+          <tr>            
+            {Object.keys(totalBahan).map(e=>{
+              if(e!="NDF")return <td key={e} style={{widtd:"10vw"}}>{e}</td>
+            })}
           </tr>
         </thead>
         <tbody>
           <tr>
-          <td>{totalBahan.BK.toFixed(2)}</td>
-          <td>{totalBahan.PK.toFixed(2)}</td>
-          <td>{totalBahan.LK.toFixed(2)}</td>
-          <td>{totalBahan.Abu.toFixed(2)}</td>
-          <td>{totalBahan.Ca.toFixed(2)}</td>
-          <td>{totalBahan.P.toFixed(2)}</td>
-          <td>{totalBahan.NDF.toFixed(2)}</td>
-          <td>{totalBahan.TDN.toFixed(2)}</td>
+            {Object.keys(totalBahan).map(e=>{
+              if(e!="NDF")return <td key={e}>{totalBahan[e].toFixed(2)}</td>
+            })}
+
+          </tr>
+          <tr>
+            {Object.keys(kesimpulanBahan).map(e=>{
+              if(e!="NDF")return <td key={e} className={kesimpulanBahan[e]>=0?"bg-success":"bg-warning"}>{kesimpulanBahan[e].toFixed(2)}</td>
+            })}
 
           </tr>
         </tbody>

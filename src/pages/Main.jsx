@@ -17,22 +17,22 @@ function Main(){
       const [dataTernak,setDataTernak] = useState(false)
       const [dataBahan,setDataBahan] = useState(false)
       useEffect(()=>{  
-        let tmp = localStorage.getItem("ternak")
+        let tmp = localStorage.getItem("dataTernak")
         if(tmp){
-          setDataTernak(JSON.parse(localStorage.getItem("ternak")))
-          setDataBahan(JSON.parse(localStorage.getItem("bahan")))
+          setDataTernak(JSON.parse(localStorage.getItem("dataTernak")))
+          setDataBahan(JSON.parse(localStorage.getItem("dataBahan")))
         }else{
           fetch("https://script.google.com/macros/s/AKfycbwgcwSOROmoKE26pyN3YkBAS2_MpaM2zC_ySZc8z0lo9_0HZXx_bJMZTFULsKVAydNiCg/exec?nama=Ternak")
           .then(res=>res.json())
           .then(res=>{
             setDataTernak(res.data)
-            localStorage.setItem("ternak",JSON.stringify(res.data))
+            localStorage.setItem("daraTernak",JSON.stringify(res.data))
         })
           fetch("https://script.google.com/macros/s/AKfycbwgcwSOROmoKE26pyN3YkBAS2_MpaM2zC_ySZc8z0lo9_0HZXx_bJMZTFULsKVAydNiCg/exec?nama=Bahan")
           .then(res=>res.json())
           .then(res=>{
             setDataBahan(res.data)
-            localStorage.setItem("bahan",JSON.stringify(res.data))
+            localStorage.setItem("dataBahan",JSON.stringify(res.data))
           })
 
         }
@@ -43,7 +43,7 @@ function Main(){
           <div className="main-cont container">
             
           <Ternak ternak={ternak} setTernak={setTernak} dataTernak={dataTernak}></Ternak>
-          <Bahan dataBahan={dataBahan}></Bahan>
+          <Bahan ternak={ternak} dataBahan={dataBahan}></Bahan>
         </div>
         )
       }else{

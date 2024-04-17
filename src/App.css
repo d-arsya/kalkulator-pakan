@@ -9,7 +9,7 @@ body{
   -webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
   animation:s3 1s infinite linear;
 }
-.main-cont{
+.main-cont, .bahan, .ternak{
   /* Copy code to element you want to animate */
 animation: customAni .5s ease 0s normal none;
 }

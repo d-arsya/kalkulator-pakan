@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 export default function Bahan() {
-  const bahan = JSON.parse(localStorage.getItem("bahan"));
+  let dataBahan = JSON.parse(localStorage.getItem("dataBahan"));
   return (
-    <div className="container">
+    <div className="container bahan">
       <h5 className="text-center">Kandungan Bahan</h5>
       <table className="table">
         <thead className="position-sticky top-0 bg-secondary">
@@ -14,23 +14,16 @@ export default function Bahan() {
             <th style={{ width: "5vw" }}>Abu</th>
             <th style={{ width: "5vw" }}>Ca</th>
             <th style={{ width: "5vw" }}>P</th>
-            <th style={{ width: "5vw" }}>NDF</th>
             <th style={{ width: "5vw" }}>TDN</th>
           </tr>
         </thead>
         <tbody>
-          {bahan.map((e, i) => {
+          {dataBahan.map((e, i) => {
             return (
               <tr key={i}>
-                <td>{e.nama}</td>
-                <td>{e.BK}</td>
-                <td>{e.PK}</td>
-                <td>{e.LK}</td>
-                <td>{e.Abu}</td>
-                <td>{e.Ca}</td>
-                <td>{e.P}</td>
-                <td>{e.NDF}</td>
-                <td>{e.TDN}</td>
+                {Object.keys(e).map(f=>{
+                if(f!="TDN"&&f!="id")return <td key={f}>{e[f]}</td>}
+              )}
               </tr>
             );
           })}

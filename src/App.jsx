@@ -1,20 +1,41 @@
-import {BrowserRouter as Router,Routes,Route} from "react-router-dom"
-import Main from "./pages/Main"
-import Bahan from "./pages/Bahan"
-import Ternak from "./pages/Ternak"
+import Main from "./pages/Main";
+import Ternak from "./pages/Ternak";
+import Bahan from "./pages/Bahan";
+import { useState } from "react";
 
 function App() {
-    return(
-
-    <Router>
-        <Routes>
-            <Route path="/" element={<Main/>}></Route>
-            <Route path="/bahan" element={<Bahan/>}></Route>
-            <Route path="/ternak" element={<Ternak/>}></Route>
-        </Routes>
-    </Router>
-    )
-
+  const [halaman, setHalaman] = useState("Main");
+  function onLink(e) {
+    switch (e.target.innerHTML) {
+      case "Home":
+        setHalaman("Main");
+        break;
+      case "Bahan":
+        setHalaman("Bahan");
+        break;
+      case "Ternak":
+        setHalaman("Ternak");
+        break;
+    }
+  }
+  return (
+    <div>
+        <ul className="nav justify-content-center">
+  <li className="nav-item">
+    <a className="nav-link" aria-current="page" onClick={(e)=>onLink(e)}>Home</a>
+  </li>
+  <li className="nav-item">
+    <a className="nav-link" onClick={(e)=>onLink(e)}>Bahan</a>
+  </li>
+  <li className="nav-item">
+    <a className="nav-link" onClick={(e)=>onLink(e)}>Ternak</a>
+  </li>
+</ul>
+      {halaman == "Main" && <Main></Main>}
+      {halaman == "Bahan" && <Bahan></Bahan>}
+      {halaman == "Ternak" && <Ternak></Ternak>}
+    </div>
+  );
 }
 
-export default App
+export default App;

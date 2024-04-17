@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PilihanBahan from "./PilihanBahan";
 import KomposisiBahan from "./KomposisiBahan"
-export default function Bahan({ dataBahan }) {
+export default function Bahan({ dataBahan,ternak }) {
   const [jumlahBahan, setJumlahBahan] = useState(3);
   const [bahanUse,setBahanUse] = useState([])
   function getBahan(id){
@@ -29,7 +29,7 @@ export default function Bahan({ dataBahan }) {
   return (
     <div>
       <PilihanBahan jumlahBahan={jumlahBahan} setBahanUse={setBahanUse} bahanUse={bahanUse} setJumlahBahan={setJumlahBahan} onBahan={onBahan} dataBahan={dataBahan}></PilihanBahan>
-      <KomposisiBahan bahanUse={bahanUse}></KomposisiBahan>
+      <KomposisiBahan ternak={ternak} bahanUse={bahanUse}></KomposisiBahan>
     </div>
   );
 }
