@@ -1,8 +1,11 @@
-<?php
+<?php 
 require("../functions.php");
-if(addUser($_POST["uname"],$_POST["email"])){
-    echo "<script>alert('Registrasi Berhasil');window.location.href='../../'</script>";
-}else{
-    echo "<script>alert('Username atau email anda telah digunakan');window.location.href='../../'</script>";
+if(isset($_POST)){
+    if(addUser($_POST["username"],$_POST["email"])){
+        setcookie("username",$_POST["username"],time()+3600,"/");
+        header("Location: ../../");
+    }else{
+        echo "<script>alert('GAGAL');window.location.href='../../'</script>";
+    }
 }
 ?>

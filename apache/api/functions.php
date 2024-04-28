@@ -1,99 +1,53 @@
-<?php
+<?php 
 $conn = mysqli_connect("localhost","root","","kalkulator_pakan",3306);
-$ipdata = json_decode(file_get_contents("https://api.ipify.org/?format=json#"))->ip;
-setcookie("ip", $ipdata, time() + 3600,"/");
-function getUsers(){
-    global $conn;
-    $result = mysqli_query($conn,"SELECT * FROM datauser");
-    $allData = [];
-    while($ini=mysqli_fetch_assoc($result)){
-        $allData[]=$ini;
-    }
-    return $allData;
-}
-function getUser($uname,$email){
-    global $conn;
-    $result = mysqli_query($conn,"SELECT * FROM datauser WHERE username='$uname' OR email='$email'");        
-    return mysqli_fetch_assoc($result);
-}
+$ip = $_SERVER["REMOTE_ADDR"];
 function addUser($uname,$email){
-    global $conn;
-    global $ipdata;
-    $exist = getUser($uname,$email);
-    if($exist){
+    global $conn,$ip;
+    $query = "INSERT INTO datauser VALUES('$uname','$email','',0)";
+    try {
+        mysqli_query($conn,$query);
+        addToken($uname);
+        return true;
+    }catch (Exception $e){
         return false;
     }
-    $query = "INSERT INTO datauser VALUES ('$uname','$email','$ipdata',0)";
-    mysqli_query($conn,$query);
-    addToken($uname,$email);
-    return true;
 }
-function addToken($uname,$email){
-    global $conn;
-    global $ipdata;
+function getUser($uname){
+    global $conn,$ip;
+    $query = "SELECT active FROM datauser WHERE userName='$uname' AND address='$ip'";
+    if(mysqli_fetch_assoc(mysqli_query($conn,$query))["active"]){
+        return true;
+    }
+    return false;    
+}
+function addToken($uname){
+    global $conn,$ip;
     $token = "";
     while(strlen($token)<6){
         $token = $token.(string)rand(11,99);
     }
-    $query = "INSERT INTO datatoken VALUES ('$token','$uname')";
+    $query = "INSERT INTO datatoken VALUES ('$token','$uname',0)";
     mysqli_query($conn,$query);
-    setcookie("email",$email,time()+(86400),"/");
-    setcookie("uname",$uname,time()+(86400),"/");
-    setcookie("ip",$ipdata,time()+(86400),"/");
-    updateAddress($uname);
+    $query = "UPDATE datauser SET address='$ip' WHERE userName='$uname'";
+    mysqli_query($conn,$query);
+    addDevice($uname);
 }
-function getToken(){
-    global $conn;
-    $result = mysqli_query($conn,"SELECT * FROM datatoken");
-    $allData = [];
-    while($ini=mysqli_fetch_assoc($result)){
-        $allData[]=$ini;
-    }
-    return $allData;
-}
-function sendMail($token){
-    global $conn;
-    $query = "SELECT u.*, t.* FROM datauser u INNER JOIN datatoken t ON u.username = t.username WHERE t.token = '$token'";
-    $res = mysqli_fetch_assoc(mysqli_query($conn,$query));
-    return $res;
-}
-function isActive($uname){
-    global $conn;
-    $query = "SELECT active FROM datauser WHERE username='$uname'";
-    $result = mysqli_query($conn,$query);
-    $allData = [];
-    while($ini=mysqli_fetch_assoc($result)){
-        $allData[]=$ini;
-    }
-    return (int)$allData[0]["active"]-1;
-    
+function addDevice($uname){
+    global $conn,$ip;
+    $tanggal = date("Y-m-d H:i");
+    $query = "INSERT INTO dataperangkat VALUES ('','$uname','$ip','$tanggal')";
+    mysqli_query($conn,$query);
 }
 function cekToken($uname,$token){
     global $conn;
-    $query = "SELECT * FROM datatoken WHERE username='$uname' AND token='$token'";
-    $result = mysqli_query($conn,$query);
-    $allData = [];
-    deleteToken($token);
-    while($ini=mysqli_fetch_assoc($result)){
-        $allData[]=$ini;
-    }
-    return $allData;
+    $query = "SELECT token FROM datatoken WHERE username='$uname'";
+    return $token==mysqli_fetch_assoc(mysqli_query($conn,$query))["token"];
 }
-function deleteToken($token){
+function setActive($uname){
     global $conn;
-    activateAccount($token);
-    $query = "DELETE FROM datatoken WHERE token='$token'";
+    $query = "UPDATE datauser SET active=1 WHERE userName='$uname'";
     mysqli_query($conn,$query);
-}
-function updateAddress($uname){
-    global $conn;
-    global $ipdata;
-    $query = "UPDATE datauser SET address='$ipdata' WHERE username='$uname'";
-    mysqli_query($conn,$query);
-}
-function activateAccount($token){
-    global $conn;
-    $query = "UPDATE datauser SET active = 1 WHERE username IN (SELECT u.username FROM datauser u INNER JOIN datatoken t ON u.username = t.username WHERE t.token = '$token')";
+    $query = "DELETE FROM datatoken WHERE userName='$uname'";
     mysqli_query($conn,$query);
 }
 ?>
