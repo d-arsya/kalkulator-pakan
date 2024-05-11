@@ -1,5 +1,4 @@
 import { useState } from "react";
-import ModalBahan from "./ModalBahan"
 export default function PilihanBahan({
   dataBahan,
   onBahan,
@@ -7,10 +6,8 @@ export default function PilihanBahan({
   setJumlahBahan,
   bahanUse,
   setBahanUse,
+  onModal
 }) {
-  function onDetail(e){
-    console.log(bahanUse[e])
-  }
   return (
     <div>
       <h5 className="my-3 text-center">Pemilihan Bahan</h5>
@@ -40,7 +37,18 @@ export default function PilihanBahan({
               
               <tr key={i}>
                 <td className="d-flex nowrap align-items-center">
-                  <ModalBahan key={i} data={bahanUse[i]}></ModalBahan>
+                  {/* <ModalBahan key={Math.random() * (100 - 1) + 1} data={bahanUse[i]}></ModalBahan> */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-three-dots-vertical"
+                    viewBox="0 0 16 16"
+                    onClick={()=>onModal(bahanUse[i])}
+                  >
+                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                  </svg>
                   <select
                     key={i}
                     onChange={(e) => {

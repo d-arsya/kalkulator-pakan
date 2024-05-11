@@ -13,7 +13,7 @@ export default function Ternak({ dataTernak,ternak,setTernak }) {
     for (let key in ternak) {
       if (key != "id" && key != "nama") {
         namaBahan.push(key);
-        nilaiBahan.push(ternak[key]);
+        nilaiBahan.push(parseFloat(ternak[key]).toFixed(1));
       }
     }
     return (
@@ -21,7 +21,7 @@ export default function Ternak({ dataTernak,ternak,setTernak }) {
         <thead>
           <tr>
             {namaBahan.map((e,i) => {
-              return <td key={i} style={{width:"10vw"}}>{e}</td>;
+              return <td key={i} style={{width:"10vw"}}>{e.toUpperCase()}</td>;
             })}
           </tr>
         </thead>

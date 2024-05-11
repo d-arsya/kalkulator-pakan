@@ -17,18 +17,19 @@ function Main(){
       const [dataTernak,setDataTernak] = useState(false)
       const [dataBahan,setDataBahan] = useState(false)
       useEffect(()=>{  
+        localStorage.clear()
         let tmp = localStorage.getItem("dataTernak")
         if(tmp){
           setDataTernak(JSON.parse(localStorage.getItem("dataTernak")))
           setDataBahan(JSON.parse(localStorage.getItem("dataBahan")))
         }else{
-          fetch("https://script.google.com/macros/s/AKfycbwgcwSOROmoKE26pyN3YkBAS2_MpaM2zC_ySZc8z0lo9_0HZXx_bJMZTFULsKVAydNiCg/exec?nama=Ternak")
+          fetch("https://raw.githubusercontent.com/d-arsya/alibaba-server/main/ternak.json")
           .then(res=>res.json())
           .then(res=>{
             setDataTernak(res.data)
             localStorage.setItem("dataTernak",JSON.stringify(res.data))
         })
-          fetch("https://script.google.com/macros/s/AKfycbwgcwSOROmoKE26pyN3YkBAS2_MpaM2zC_ySZc8z0lo9_0HZXx_bJMZTFULsKVAydNiCg/exec?nama=Bahan")
+          fetch("https://raw.githubusercontent.com/d-arsya/alibaba-server/main/bahan.json")
           .then(res=>res.json())
           .then(res=>{
             setDataBahan(res.data)

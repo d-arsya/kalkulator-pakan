@@ -1,9 +1,14 @@
 import { useState } from "react";
 import PilihanBahan from "./PilihanBahan";
-import KomposisiBahan from "./KomposisiBahan"
+import KomposisiBahan from "./KomposisiBahan";
+import ModalBahan from "./ModalBahan";
 export default function Bahan({ dataBahan,ternak }) {
   const [jumlahBahan, setJumlahBahan] = useState(3);
   const [bahanUse,setBahanUse] = useState([])
+  const [bahanModal,setBahanModal] = useState([])
+  function onModal(e){
+    setBahanModal(e)
+  }
   function getBahan(id){
     return dataBahan.filter(e=>{return e.id==id})[0]
   }
@@ -28,8 +33,9 @@ export default function Bahan({ dataBahan,ternak }) {
   }     
   return (
     <div>
-      <PilihanBahan jumlahBahan={jumlahBahan} setBahanUse={setBahanUse} bahanUse={bahanUse} setJumlahBahan={setJumlahBahan} onBahan={onBahan} dataBahan={dataBahan}></PilihanBahan>
+      <PilihanBahan onModal = {onModal} jumlahBahan={jumlahBahan} setBahanUse={setBahanUse} bahanUse={bahanUse} setJumlahBahan={setJumlahBahan} onBahan={onBahan} dataBahan={dataBahan}></PilihanBahan>
       <KomposisiBahan ternak={ternak} bahanUse={bahanUse}></KomposisiBahan>
+      <ModalBahan data={bahanModal}></ModalBahan>
     </div>
   );
 }

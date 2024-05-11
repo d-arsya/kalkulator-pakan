@@ -7,24 +7,24 @@ export default function KomposisiBahan({ bahanUse,ternak }) {
     return parseFloat((parseInt(ber) / 100) * berat).toFixed(1);
   }
   let totalBahan = {
-    BK: 0,
-    PK: 0,
-    LK: 0,
-    Abu: 0,
-    Ca: 0,
-    P: 0,
-    NDF: 0,
-    TDN: 0,
+    bk: 0,
+    pk: 0,
+    lk: 0,
+    abu: 0,
+    ca: 0,
+    p: 0,
+    ndf: 0,
+    tdn: 0,
   };
   let kesimpulanBahan = {
-    BK: 0,
-    PK: 0,
-    LK: 0,
-    Abu: 0,
-    Ca: 0,
-    P: 0,
-    NDF: 0,
-    TDN: 0,
+    bk: 0,
+    pk: 0,
+    lk: 0,
+    abu: 0,
+    ca: 0,
+    p: 0,
+    ndf: 0,
+    tdn: 0,
   };
   let semua = [...bahanUse].map((e) => {
     totalHarga +=
@@ -94,20 +94,20 @@ export default function KomposisiBahan({ bahanUse,ternak }) {
         <thead>
           <tr>            
             {Object.keys(totalBahan).map(e=>{
-              if(e!="NDF")return <td key={e} style={{widtd:"10vw"}}>{e}</td>
+              if(e!="ndf")return <td key={e} style={{widtd:"10vw"}}>{e.toUpperCase()}</td>
             })}
           </tr>
         </thead>
         <tbody>
           <tr>
             {Object.keys(totalBahan).map(e=>{
-              if(e!="NDF")return <td key={e}>{totalBahan[e].toFixed(2)}</td>
+              if(e!="ndf")return <td key={e}>{totalBahan[e].toFixed(2)}</td>
             })}
 
           </tr>
           <tr>
             {Object.keys(kesimpulanBahan).map(e=>{
-              if(e!="NDF")return <td key={e} className={kesimpulanBahan[e]>=0?"bg-success":"bg-warning"}>{kesimpulanBahan[e].toFixed(2)}</td>
+              if(e!="ndf")return <td key={e} className={kesimpulanBahan[e]>=0?"bg-success":"bg-warning"}>{kesimpulanBahan[e].toFixed(2)}</td>
             })}
 
           </tr>

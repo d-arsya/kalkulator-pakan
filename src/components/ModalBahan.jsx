@@ -1,21 +1,25 @@
 const initialState = {
     id: "",
   nama: "",
-  BK: 0,
-  PK: 0,
-  LK: 0,
-  Abu: 0,
-  Ca: 0,
-  P: 0,
-  NDF: 0,
-  TDN: 0,
+  bk: 0,
+    pk: 0,
+    lk: 0,
+    abu: 0,
+    ca: 0,
+    p: 0,
+    ndf: 0,
+    tdn: 0,
   }
 export default function ModalBahan({data=initialState}) {
+  if(data!=initialState){
+    document.querySelector("#toggleModal").click();
+  }
   return (
     <>
       <div
+      id="toggleModal"
         data-bs-toggle="modal"
-        data-bs-target={`#exampleModal${data.id}`}
+        data-bs-target={`#exampleModal`}
       >
         <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +36,7 @@ export default function ModalBahan({data=initialState}) {
 
       <div
         className="modal fade"
-        id={`exampleModal${data.id}`}
+        id={`exampleModal`}
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -65,13 +69,13 @@ export default function ModalBahan({data=initialState}) {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{data.BK}</td>
-                            <td>{data.PK}</td>
-                            <td>{data.LK}</td>
-                            <td>{data.Abu}</td>
-                            <td>{data.Ca}</td>
-                            <td>{data.P}</td>
-                            <td>{data.TDN}</td>
+                            <td>{data.bk}</td>
+                            <td>{data.pk}</td>
+                            <td>{data.lk}</td>
+                            <td>{data.abu}</td>
+                            <td>{data.ca}</td>
+                            <td>{data.p}</td>
+                            <td>{data.tdn}</td>
                         </tr>
                     </tbody>
                 </table>
